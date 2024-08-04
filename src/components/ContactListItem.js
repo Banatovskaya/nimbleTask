@@ -15,10 +15,10 @@ export const ContactListItem = ({
         <img
           src={avatar}
           alt={`${firstName} ${lastName}`}
-          className="w-12 h-12 rounded-full mr-4"
+          className="w-[59px] h-[59px] rounded-full mr-4"
         />
         <div>
-          <div className="flex-grow text-[16px]">
+          <div className="text-[16px]">
             <h3 className=" ">
               {firstName} {lastName}
             </h3>
