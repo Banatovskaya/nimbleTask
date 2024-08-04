@@ -3,21 +3,21 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { usePutTagsMutation } from "../services/postService";
 
-const firstName = "гриша",
-  lastName = "петров",
-  email = "dffddf@gmail.com",
-  tags = [
-    {
-      id: "5df60a4c5ac6bf48f1b8cd30/523",
-      tag: "523",
-    },
-    {
-      id: "5df60a4c5ac6bf48f1b8cd30/322",
-      tag: "322",
-    },
-  ],
-  avatar =
-    "https://live.devnimble.com/api/avatars/5df60a4c5ac6bf48f1b8cd30/66aaaecfadb7be6025442c9f/person/1";
+// const firstName = "гриша",
+//   lastName = "петров",
+//   email = "dffddf@gmail.com",
+//   tags = [
+//     {
+//       id: "5df60a4c5ac6bf48f1b8cd30/523",
+//       tag: "523",
+//     },
+//     {
+//       id: "5df60a4c5ac6bf48f1b8cd30/322",
+//       tag: "322",
+//     },
+//   ],
+//   avatar =
+//     "https://live.devnimble.com/api/avatars/5df60a4c5ac6bf48f1b8cd30/66aaaecfadb7be6025442c9f/person/1";
 
 export const ContactPage = () => {
   const id = useParams();
@@ -29,22 +29,28 @@ export const ContactPage = () => {
     e.preventDefault();
     if (newTagsString.length){
         newTags = newTagsString.split(/[\s,]+/);
-        // sendNewTags({newTags});
-        // if(isSuccess){ setNewTagsString("");}
-        // if (isError) {alert('server err')}
+        sendNewTags({newTags});
+        if(isSuccess){ setNewTagsString("");}
+        if (isError) {alert('server err')}
     }
-        console.log("tag added:", {'tags':newTags});
+        // console.log("tag added:", {'tags':newTags});
   };
 
-    // const {
-    //     data: contactData=[],
-    //     isLoading: loadingData,
-    //     error
-    // } = useGetContactDataQuery(id);
-    // console.log(error)
+    const {
+        data: contactData={},
+        isLoading: loadingData,
+        error
+    } = useGetContactDataQuery(id);
+    console.log(error)
 
-    // if (loadingData) return <div className="p-10 text-xs">...LOADING</div>;
-    // if (error) return <h1 className="p-10">ERROR</h1>;
+    if (loadingData) return <div className="p-10 text-xs">...LOADING</div>;
+    if (error) return <h1 className="p-10">ERROR</h1>;
+
+    const firstName=contactData.resources.fields["first name"][0].value,
+          lastName=contactData.resources.fields["last name"][0].value,
+          email=contactData.resources.fields.email[0].value,
+          tags=contactData.resources.tags,
+          avatar=contactData.resources.avatar_url
 
   return (
     <div className="contactPage flex justify-center items-center  ">

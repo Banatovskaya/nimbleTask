@@ -5,7 +5,7 @@ import { ContactListItem } from "./contactListItem";
 // const contactsList = list.resources;
 
 export const List = () => {
-  const { data: list = [], isLoading, error } = useGetContactsQuery();
+  const { data: list = {}, isLoading, error } = useGetContactsQuery();
 //   const { data: list = [], isLoading, error } = useGetContactsQuery('?sort=created:desc'); // for new contacts
   const contactsList = list.resources;
   console.log("vv", contactsList);
