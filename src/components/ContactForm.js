@@ -1,24 +1,69 @@
 import React, { useState } from "react";
+import { usePostContactMutation } from "../services/postService";
 
 export const ContactForm = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [errors, setErrors] = useState("");
+  const [sendNewContact, { isError, isLoading, isSuccess }] =
+    usePostContactMutation();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!firstName && !lastName) {
       setErrors("At least one of the Name fields must be filled");
-      console.log("err");
       return;
     }
-
-    console.log("Contact added:", { firstName, lastName, email });
-    setFirstName("");
-    setLastName("");
-    setEmail("");
-    setErrors("");
+    const newContact = {
+      avatar_url: "",
+      fields: {email: [
+                {
+                    label: "email",
+                    modifier: "",
+                    value: email,
+                    is_primary: false
+                }
+            ],
+            "first name": [
+                {
+                    label: "first name",
+                    modifier: "",
+                    value: firstName,
+                    is_primary: false
+                }
+            ],
+            "last name": [
+                {
+                    label: "last name",
+                    modifier: "",
+                    value: lastName,
+                    is_primary: false
+                }
+            ]},
+      owner_id: null,
+      privacy: {
+        edit: null,
+        read: null,
+      },
+      record_type: "person",
+      tags: "",
+      type: "person",
+    }
+    sendNewContact(newContact);
+    console.log(newContact)
+    
+    if (isSuccess) {
+      console.log("Contact added:", { firstName, lastName, email });
+      setFirstName("");
+      setLastName("");
+      setEmail("");
+      setErrors("");
+    }
+    if (isError) {
+      alert("server err");
+      console.log(isError)
+    }
   };
 
   return (
