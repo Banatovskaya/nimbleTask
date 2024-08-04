@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 export const ContactListItem = ({
   id,
   firstName,
@@ -7,11 +8,11 @@ export const ContactListItem = ({
   avatar,
 }) => {
   return (
-    <div
-      className="contactsList relative bg-custom-gray-light mb-4
-                  h-auto w-[100%] p-4"
+    <NavLink to={`/${id}`}
+      className=""
     >
-      <div className="flex">
+      <div className="flex contactsList relative bg-custom-gray-light mb-4
+                  h-auto w-[100%] p-4">
         <img
           src={avatar}
           alt={`${firstName} ${lastName}`}
@@ -53,6 +54,6 @@ export const ContactListItem = ({
           </svg>
         </div>
       </div>
-    </div>
+    </NavLink>
   );
 };
