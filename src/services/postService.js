@@ -17,6 +17,12 @@ export const postAPI = createApi({
       }),
       providesTags: ["Contacts"],
     }),
+    getContactData: builder.query({
+      query: (id) => ({
+        url: "/" + "contact/id",
+        headers: headers ,
+      }),
+    }),
     postContact: builder.mutation({
       query: (body) => ({
         data: body,
@@ -48,6 +54,7 @@ export const postAPI = createApi({
 
 export const {
     useGetContactsQuery,
+    useGetContactDataQuery,
     usePostContactMutation,
     useDeleteContactMutation,
     usePutTagsMutation
