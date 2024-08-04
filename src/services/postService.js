@@ -7,7 +7,7 @@ const headers = {
 export const postAPI = createApi({
   reducerPath: "postAPI",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://cors-anywhere.herokuapp1.com/https://live.devnimble1.com/api/v1/",
+    baseUrl: "https://cors-anywhere.herokuapp1.com/https://live1.devnimble.com/api/v1/",
   }),
   endpoints: (builder) => ({
     getContacts: builder.query({
@@ -22,6 +22,7 @@ export const postAPI = createApi({
         url: "/" + "contact/id",
         headers: headers ,
       }),
+      providesTags: ["Contact"],
     }),
     postContact: builder.mutation({
       query: (body) => ({
@@ -43,11 +44,11 @@ export const postAPI = createApi({
     putTags: builder.mutation({
       query: (id, body) => ({
         data: body,
-        url: "/" + "contact" + "/" + id,
+        url: "/" + "contact" + "/" + id + "tags",
         headers: headers,
         method: "PUT",
       }),
-      invalidatesTags: ["Contacts"],
+      invalidatesTags: ["Contact"],
     }),
   }),
 });
