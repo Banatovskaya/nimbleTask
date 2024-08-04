@@ -4,8 +4,8 @@ import { ContactForm } from "../components/ContactForm";
 
 export const ContactsList = () => {
   return (
-    <div
-      className="contactsList-wrap container min-w-[400px]
+    <div           //width 400px-container padding 12+12
+      className="contactsList-wrap container min-w-[376px] 
                     flex justify-around flex-col
                     md:flex-row md:pt-[16px] px-[14px]
                     lg:pt-[36px]
@@ -22,8 +22,8 @@ export const ContactsList = () => {
       </div>
       <div
         className="contactsList-Wrap
-                      h-[386px] overflow-y-auto scroll-hide
-                      md:w-[50%] 
+                      h-[386px] scroll-hide
+                      md:w-[50%] md:overflow-y-auto 
                       lg:w-[558px] "
       >
         <List></List>
