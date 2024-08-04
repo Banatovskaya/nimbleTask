@@ -1,4 +1,6 @@
 import { NavLink } from "react-router-dom";
+import { useDeleteContactMutation } from "../services/postService";
+
 export const ContactListItem = ({
   id,
   firstName,
@@ -7,12 +9,27 @@ export const ContactListItem = ({
   tags,
   avatar,
 }) => {
+  const [deleteData, { isError, isLoading, isSuccess }] =
+    useDeleteContactMutation();
+
+  const deleteItem = (e) => {
+    e.preventDefault()
+    console.log('delete')
+    deleteData(id);
+    if (isError) {
+      alert("server err");
+    }
+    if (isSuccess) {
+      alert("delete");
+    }
+  };
+
   return (
-    <NavLink to={`/${id}`}
-      className=""
-    >
-      <div className="flex contactsList relative bg-custom-gray-light mb-4
-                  h-auto w-[100%] p-4">
+    <NavLink to={`/${id}`} className="">
+      <div
+        className="flex contactsList relative bg-custom-gray-light mb-4
+                  h-auto w-[100%] p-4"
+      >
         <img
           src={avatar}
           alt={`${firstName} ${lastName}`}
@@ -37,7 +54,10 @@ export const ContactListItem = ({
             </div>
           </div>
         </div>
-        <div className="closeIcon absolute top-2 right-3 w-6 h-6">
+        <div
+          className="closeIcon absolute top-2 right-3 w-6 h-6"
+          onClick={deleteItem} 
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
