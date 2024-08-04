@@ -4,13 +4,13 @@ export const ContactForm = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
-  const [errors, setErrors] = useState('');
+  const [errors, setErrors] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!firstName && !lastName) {
-      setErrors('At least one of the Name fields must be filled');
-      console.log('err')
+      setErrors("At least one of the Name fields must be filled");
+      console.log("err");
       return;
     }
 
@@ -18,17 +18,15 @@ export const ContactForm = () => {
     setFirstName("");
     setLastName("");
     setEmail("");
-    setErrors('');
+    setErrors("");
   };
-
-  
 
   return (
     <div className="createContact h-[100%] w-[100%] ">
       <h2 className="block text-[20px] font-[500] leading-[30px]">
         Create Contact
       </h2>
-      <form onSubmit={handleSubmit} >
+      <form onSubmit={handleSubmit}>
         <div>
           <label
             htmlFor="firstName"
@@ -41,9 +39,9 @@ export const ContactForm = () => {
             id="firstName"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
-            className="mt-[6px] block w-full border border-gray-400 
-            rounded-[8px] h-[48px] px-[12px] py-[14px] my-[10px]"
-            />
+            className="mt-[6px] block w-full border border-custom-gray-dark
+                      rounded-[8px] h-[48px] px-[12px] py-[14px] my-[10px]"
+          />
         </div>
         <div>
           <label
@@ -57,8 +55,8 @@ export const ContactForm = () => {
             id="lastName"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
-            className="mt-[6px] block w-full border border-gray-400 
-            rounded-[8px] h-[48px] px-[12px] py-[14px] my-[10px]"
+            className="mt-[6px] block w-full border border-custom-gray-dark 
+                      rounded-[8px] h-[48px] px-[12px] py-[14px] my-[10px]"
           />
         </div>
         <div>
@@ -73,21 +71,19 @@ export const ContactForm = () => {
             id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="mt-[6px] block w-full border border-gray-400 
-            rounded-[8px] h-[48px] px-[12px] py-[14px] my-[10px]"
+            className="mt-[6px] block w-full border border-custom-gray-dark
+                      rounded-[8px] h-[48px] px-[12px] py-[14px] my-[10px]"
             required
           />
         </div>
         <button
           type="submit"
-          className="block w-full border border-gray-400 
-            rounded-[4px] h-[44px] px-[10px] py-[10px] mt-5 font-[500] text-[16px]"
+          className="block w-full border border-custom-gray-dark
+                    rounded-[4px] h-[44px] px-[10px] py-[10px] mt-5 font-[500] text-[16px]"
         >
           Add Contact
         </button>
-        {errors && (
-            <p className="text-red-700">{errors}</p>
-          )}
+        {errors && <p className="text-red-700">{errors}</p>}
       </form>
     </div>
   );

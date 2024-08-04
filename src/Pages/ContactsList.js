@@ -21,8 +21,8 @@ export const ContactsList = () => {
         <ContactForm></ContactForm>
       </div>
       <div
-        className="contactsList-Wrap bg-slate-50 border border-black
-                       h-[386px] 
+        className="contactsList-Wrap
+                      h-[386px] overflow-y-auto scroll-hide
                       md:w-[50%] 
                       lg:w-[558px] "
       >
