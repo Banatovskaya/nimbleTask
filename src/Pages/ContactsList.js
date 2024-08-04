@@ -1,19 +1,34 @@
-import { useGetContactsQuery } from "../services/postService";
+import { List } from "../components/List";
+import { ContactForm } from "../components/ContactForm";
+
 
 export const ContactsList = () => {
-
-    const {
-        data: contactsList=[],
-        isLoading,
-        error
-    } = useGetContactsQuery();
-    console.log(error)
-
-    if (isLoading) return <div className="p-10 text-xs">...LOADING</div>;
-    if (error) return <h1 className="p-10">ERROR</h1>; 
-    
-
-    return(
-        <h1>{contactsList}</h1>
-    )
-}
+  return (
+    <div
+      className="contactsList-wrap container min-w-[400px]
+                    flex justify-around flex-col
+                    md:flex-row md:pt-[16px] px-[14px]
+                    lg:pt-[36px]
+                    xl:px-[174px] xl:justify-between
+                    "
+    >
+      <div
+        className="createContact-Wrap
+                      h-[360px] 
+                       md:w-[30%] 
+                      lg:w-[280px]  "
+      >
+        <ContactForm></ContactForm>
+      </div>
+      <div
+        className="contactsList-Wrap bg-slate-50 border border-black
+                       h-[386px] 
+                      md:w-[50%] 
+                      lg:w-[558px] "
+      >
+        <List></List>
+      </div>
+      
+    </div>
+  );
+};

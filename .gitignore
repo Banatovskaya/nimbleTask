@@ -4,6 +4,8 @@
 /node_modules
 /.pnp
 .pnp.js
+list.json
+public/manifest.json
 
 # testing
 /coverage
