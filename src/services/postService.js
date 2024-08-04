@@ -7,12 +7,12 @@ const headers = {
 export const postAPI = createApi({
   reducerPath: "postAPI",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://cors-anywhere.herokuapp1.com/https://live1.devnimble.com/api/v1/",
+    baseUrl: "https://cors-anywhere.herokuapp.com/https://live.devnimble.com/api/v1/",
   }),
   endpoints: (builder) => ({
     getContacts: builder.query({
-      query: () => ({
-        url: "/" + "contacts",
+      query: (param = '') => ({
+        url: "/" + "contacts" + "param",
         headers: headers ,
       }),
       providesTags: ["Contacts"],
