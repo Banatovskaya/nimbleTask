@@ -11,15 +11,15 @@ export const postAPI = createApi({
   }),
   endpoints: (builder) => ({
     getContacts: builder.query({
-      query: (param = '') => ({
-        url: "/" + "contacts" + "param",
+      query: () => ({
+        url: "/" + "contacts/?sort=created:desc",
         headers: headers ,
       }),
       providesTags: ["Contacts"],
     }),
     getContactData: builder.query({
       query: (id) => ({
-        url: "/" + "contact/id",
+        url: "/" + "contact/" + id,
         headers: headers ,
       }),
       providesTags: ["Contact"],
@@ -44,7 +44,7 @@ export const postAPI = createApi({
     putTags: builder.mutation({
       query: (id, body) => ({
         data: body,
-        url: "/" + "contact" + "/" + id + "tags",
+        url: "/" + "contacts" + "/" + id + "/tags",
         headers: headers,
         method: "PUT",
       }),
