@@ -17,42 +17,50 @@ export const ContactForm = () => {
     }
     const newContact = {
       avatar_url: "",
-      fields: {email: [
-                {
-                    label: "email",
-                    modifier: "",
-                    value: email,
-                    is_primary: false
-                }
-            ],
-            "first name": [
-                {
-                    label: "first name",
-                    modifier: "",
-                    value: firstName,
-                    is_primary: false
-                }
-            ],
-            "last name": [
-                {
-                    label: "last name",
-                    modifier: "",
-                    value: lastName,
-                    is_primary: false
-                }
-            ]},
+      fields: {
+        email: [
+          {
+            label: "email",
+            modifier: "",
+            value: email,
+            is_primary: false,
+          },
+        ],
+        "first name": [
+          {
+            label: "first name",
+            modifier: "",
+            value: firstName,
+            is_primary: false,
+          },
+        ],
+        "last name": [
+          {
+            label: "last name",
+            modifier: "",
+            value: lastName,
+            is_primary: false,
+          },
+        ],
+      },
       owner_id: null,
       privacy: {
-        edit: null,
-        read: null,
+        edit: {
+          group_ids: [],
+          user_ids: [],
+        },
+        read: {
+          group_ids: [],
+          user_ids: [],
+        },
       },
       record_type: "person",
       tags: "",
       type: "person",
-    }
+    };
     sendNewContact(newContact);
-    console.log(newContact)
-    
+    console.log(newContact);
+
     if (isSuccess) {
       console.log("Contact added:", { firstName, lastName, email });
       setFirstName("");
@@ -61,8 +69,7 @@ export const ContactForm = () => {
       setErrors("");
     }
     if (isError) {
-      alert("server err");
-      console.log(isError)
+      console.log(isError);
     }
   };
 

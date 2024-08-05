@@ -13,14 +13,13 @@ export const ContactListItem = ({
     useDeleteContactMutation();
 
   const deleteItem = (e) => {
-    e.preventDefault()
-    console.log('delete')
+    e.preventDefault();
     deleteData(id);
     if (isError) {
       alert("server err");
     }
     if (isSuccess) {
-      alert("delete");
+
     }
   };
 
