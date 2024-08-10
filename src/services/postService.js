@@ -26,7 +26,7 @@ export const postAPI = createApi({
     }),
     postContact: builder.mutation({
       query: (body) => ({
-        data: body,
+        body: body,
         url: "/" + "contact",
         headers: headers,
         method: "POST",
@@ -42,13 +42,13 @@ export const postAPI = createApi({
       invalidatesTags: ["Contacts"],
     }),
     putTags: builder.mutation({
-      query: (id, body) => ({
-        data: body,
+      query: ({id, body}) => ({
+        body: body,
         url: "/" + "contacts" + "/" + id + "/tags",
         headers: headers,
         method: "PUT",
       }),
-      invalidatesTags: ["Contact"],
+      invalidatesTags: ["Contact", "Contacts"],
     }),
   }),
 });
