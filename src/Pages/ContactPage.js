@@ -1,39 +1,51 @@
 import { useGetContactDataQuery } from "../services/postService";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { usePutTagsMutation } from "../services/postService";
 
 export const ContactPage = () => {
-  const {id} = useParams();
+  const { id } = useParams();
   let newTags = [];
   const [newTagsString, setNewTagsString] = useState("");
   const [sendNewTags, { isError, isLoading, isSuccess }] = usePutTagsMutation();
 
+  useEffect(() => {
+    if (isSuccess) {
+      setNewTagsString("");
+    }
+  }, [isSuccess]);
+
+  useEffect(() => {
+    if (isError) {
+      alert("server err");
+    }
+  }, [isError]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (newTagsString.length){
-        newTags = newTagsString.split(/[\s,]+/);
-        sendNewTags(id, {'tags':newTags});
-        if(isSuccess){ setNewTagsString("");}
-        if (isError) {alert('server err')}
+    if (newTagsString.length) {
+      const newTagsArr  = newTagsString.split(/[\s,]+/)
+      const tagValues = tags.map(tag => tag.tag);
+      newTags = [...tagValues,...newTagsArr];
+      const body = { tags: newTags };
+      sendNewTags({ id, body });
     }
-        console.log("tag added:", {'tags':newTags});
   };
 
-    const {
-        data: contactData={},
-        isLoading: loadingData,
-        error
-    } = useGetContactDataQuery(id);
+  const {
+    data: contactData = {},
+    isLoading: loadingData,
+    error,
+  } = useGetContactDataQuery(id);
 
-    if (loadingData) return <div className="p-10 text-xs">...LOADING</div>;
-    if (error) return <h1 className="p-10">ERROR</h1>;
+  if (loadingData) return <div className="p-10 text-xs">...LOADING</div>;
+  if (error) return <h1 className="p-10">ERROR</h1>;
 
-    const firstName=contactData.resources[0].fields["first name"]?.[0]?.value || '',
-          lastName=contactData.resources[0].fields["last name"]?.[0]?.value || '',
-          email=contactData.resources[0].fields.email[0].value,
-          tags=contactData.resources[0].tags,
-          avatar=contactData.resources[0].avatar_url
+  const firstName = contactData.resources[0].fields["first name"]?.[0]?.value || "",
+    lastName = contactData.resources[0].fields["last name"]?.[0]?.value || "",
+    email = contactData.resources[0].fields.email[0].value,
+    tags = contactData.resources[0].tags || [],
+    avatar = contactData.resources[0].avatar_url;
 
   return (
     <div className="contactPage flex justify-center items-center  ">
