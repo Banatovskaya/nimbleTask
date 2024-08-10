@@ -1,7 +1,6 @@
 import { List } from "../components/List";
 import { ContactForm } from "../components/ContactForm";
 
-
 export const ContactsList = () => {
   return (
     <div           //width 400px-container padding 12+12
