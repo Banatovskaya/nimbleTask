@@ -1,46 +1,59 @@
-# Getting Started with Create React App and Redux
+Додаток повинен містити наступну функціональність:
+Відображення списку контактів.
+Для отримання контактів використовуйте метод
+GET https://live.devnimble.com/api/v1/contacts https://www.nimble.com/developers/docs/#tag/Contacts/operation/list-contacts
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
+Для відображення нещодавно доданих контактів, потрібно додати параметр до запиту.
+sort: 'created:desc',
 
-## Available Scripts
+Картка контакту повинна відображати: avatar, first name, last name, email, contacts tags. Кнопка видалення контакту. 
+Пагінація не потрібна, потрібно відобразити контакти з першої сторінки.
 
-In the project directory, you can run:
+Cтворення нового контакту. 
+Для створення контакту використовуйте метод
+POST https://live.devnimble.com/api/v1/contact
+https://www.nimble.com/developers/docs/#tag/Contacts/operation/post-contact
 
-### `npm start`
+Секція з створенням нового контакту має бути стікі, не скролитися з списком контактів на десктоп вигляді.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Для простоти створюйте всі контакти з типом person, приватністю контакту видимою для всіх та без власника контакту.
+record_type: 'person',
+privacy: {
+edit: null,
+read: null,
+},
+owner_id: null,
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+	Одне з полів first name або last name має бути заповненим для створення контакту. 
+	Поле email повинно мати валідацію.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+Видалення контакту. 
+Використовуйте метод DELETE https://live.devnimble.com/api/v1/contact/${contactId}
+https://www.nimble.com/developers/docs/#tag/Contacts/operation/delete-contact
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Cторінка контакту.
+Клік на картку контакту повинен відкрити сторінку контакту, перейти на роут на зразок /contact/{id}
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Для отримання даних контакту використовуйте метод 
+GET https://live.devnimble.com/api/v1/contact/${id}
+Сторінка контакту повинна відображати: avatar, first name, last name, email, contacts tags. 
+Секцію з інпутом для додавання тегів до контакту.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Додавання тегів до контакту. 
+Має бути можливість додати декілька тегів одночасно.
+Використовуйте метод
+PUT https://live.devnimble.com/api/v1/contact/${id}/tags
+https://www.nimble.com/developers/docs/#tag/Contacts/operation/put-contact-tags
 
-### `npm run eject`
+Для автентифікації використовуйте Authorization хедер і токен ("Authorization: Bearer YOUR_API_KEY") для запитів.
+Token  VlP9cwH6cc7Kg2LsNPXpAvF6QNmgZn
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+У файлі package.json, додайте поле «проксі» для проксі API запитів до сервера під час розробки.
+Запитит потрібно робити у вигляді https://cors-anywhere.herokuapp.com/https://live.devnimble.com/api/v1/contacts
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Це допомагає уникнути проблем CORS (Cross-Origin Resource Sharing).
+Для задеплоїного застосунку, щоб уникнути проблем з CORS можна використати https://cors-anywhere.herokuapp.com/corsdemo чи будь-які альтернативи.  
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+"proxy": "https://live.devnimble.com",
