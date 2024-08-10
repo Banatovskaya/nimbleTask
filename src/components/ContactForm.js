@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { usePostContactMutation } from "../services/postService";
 
 export const ContactForm = () => {
@@ -45,33 +45,29 @@ export const ContactForm = () => {
       },
       owner_id: null,
       privacy: {
-        edit: {
-          group_ids: [],
-          user_ids: [],
-        },
-        read: {
-          group_ids: [],
-          user_ids: [],
-        },
-      },
+        edit: null,
+        read: null,
+        },       
       record_type: "person",
       tags: "",
       type: "person",
     };
     sendNewContact(newContact);
-    console.log(newContact);
+  };
 
+  useEffect(()=>{
     if (isSuccess) {
-      console.log("Contact added:", { firstName, lastName, email });
       setFirstName("");
       setLastName("");
       setEmail("");
       setErrors("");
     }
-    if (isError) {
-      console.log(isError);
+  },[isSuccess])
+
+  useEffect(()=>{
+      if (isError) {
     }
-  };
+  },[isError])
 
   return (
     <div className="createContact h-[100%] w-[100%] ">
